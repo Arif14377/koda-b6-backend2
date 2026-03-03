@@ -1,15 +1,15 @@
-package users
+package service
 
 import (
 	"github.com/arif14377/koda-b6-backend2/internal/models"
-	"github.com/arif14377/koda-b6-backend2/internal/repository/users"
+	repository "github.com/arif14377/koda-b6-backend2/internal/repository/users"
 )
 
 type Service struct {
-	repo *users.Repository
+	repo *repository.Repository
 }
 
-func NewService(repo *users.Repository) *Service {
+func NewService(repo *repository.Repository) *Service {
 	return &Service{
 		repo: repo,
 	}

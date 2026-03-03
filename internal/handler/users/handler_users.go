@@ -1,16 +1,16 @@
-package users
+package handler
 
 import (
-	"github.com/arif14377/koda-b6-backend2/internal/service/users"
+	service "github.com/arif14377/koda-b6-backend2/internal/service/users"
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
-	service *users.Service
+	service *service.Service
 	*gin.Engine
 }
 
-func NewHandler(service *users.Service, api *gin.Engine) *Handler {
+func NewHandler(service *service.Service, api *gin.Engine) *Handler {
 	return &Handler{
 		service: service,
 		Engine:  api,

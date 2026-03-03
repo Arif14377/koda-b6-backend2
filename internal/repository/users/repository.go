@@ -1,4 +1,4 @@
-package users
+package repository
 
 import "github.com/arif14377/koda-b6-backend2/internal/models"
 
