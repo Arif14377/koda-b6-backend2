@@ -1,2 +1,12 @@
 GET /users/ HTTP/1.1
 Host: localhost:8888
+
+POST /users/register HTTP/1.1
+Host: localhost:8888
+Content-Type: application/json
+
+{
+    "fullName":"Koda Tech",
+    "email":"koda@mail.com",
+    "password":123,
+}
