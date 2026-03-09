@@ -32,4 +32,14 @@ go get -u github.com/joho/godotenv
 REDIS_HOST="localhost"
 REDIS_PORT="6379"
 ```
-8. Buat logic di repository
+8. Buat NewClient Redis di main.go untuk quick start / di /di/container.go
+```go
+rdb := redis.NewClient(&redis.Options{
+    Addr:     fmt.Sprintf("%s:%s", os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT")),
+    DB:       0, //default DB
+    Password: "",
+})
+defer rdb.Close()
+```
+
+9. 

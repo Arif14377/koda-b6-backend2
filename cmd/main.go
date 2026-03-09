@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -22,10 +23,28 @@ func main() {
 		log.Fatalf("Failed to load godotenv: %v", err)
 	}
 
+	// TODO: pindahkan pembacaan env ke preload satu file khusus.
+	// TODO: Baru coba quick startup, buat sesuai kebutuhan.
 	rdb := redis.NewClient(&redis.Options{
-		Addr: fmt.Sprintf(os.Getenv("REDIS_HOST"), ":", os.Getenv("REDIS_HOST")),
+		Addr:     fmt.Sprintf("%s:%s", os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT")),
+		DB:       0, //default DB
+		Password: "",
 	})
 	defer rdb.Close()
+
+	err = rdb.Set(ctx, "Key", "Value", 20*time.Second).Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	val, err := rdb.Get(ctx, "key").Result()
+	if err == redis.Nil {
+		fmt.Println("Key doesn't exists")
+	} else if err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Println("Key: ", val)
+	}
 
 	r := gin.Default()
 
